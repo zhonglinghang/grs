@@ -1,0 +1,14 @@
+# # Logger level
+level: debug
+
+api_addr: ":8090"
+rtmp_addr: ":1935"
+auto_pull_enable: 1
+block_mode: 0
+
+server:
+- appname: live
+  live: true
+  hls: true
+  api: true
+  flv: true
