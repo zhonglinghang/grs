@@ -343,6 +343,14 @@ func (connClient *ConnClient) Write(c ChunkStream) error {
 	return connClient.conn.Write(&c)
 }
 
+func (connClient *ConnClient) WriteStreamEOFCmd() error {
+	return connClient.conn.SetStreamEOF()
+}
+
+func (connClient *ConnClient) WriteStreamPingRequestCmd() error {
+	return connClient.conn.SetPing()
+}
+
 func (connClient *ConnClient) Flush() error {
 	return connClient.conn.Flush()
 }

@@ -10,7 +10,10 @@ require (
 require (
 	github.com/form3tech-oss/jwt-go v3.2.2+incompatible // indirect
 	github.com/kr/text v0.2.0 // indirect
+	github.com/pkg/errors v0.8.1 // indirect
 	github.com/rogpeppe/go-internal v1.6.1 // indirect
+	github.com/yutopp/go-amf0 v0.0.0-20180803120851-48851794bb1f // indirect
+	github.com/yutopp/go-flv v0.2.0 // indirect
 )
 
 require (

@@ -188,3 +188,7 @@ func (self *StaticPush) HandleAvPacket() {
 func (self *StaticPush) IsStart() bool {
 	return self.startflag
 }
+
+func (self *StaticPush) SendStreamPingRequestCmd() error {
+	return self.connectClient.WriteStreamPingRequestCmd()
+}

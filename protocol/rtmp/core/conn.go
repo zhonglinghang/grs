@@ -205,3 +205,26 @@ func (conn *Conn) SetRecorded() {
 	}
 	conn.Write(&ret)
 }
+
+func (conn *Conn) SetStreamEOF() error {
+	ret := conn.userControlMsg(streamEOF, 4)
+	for i := 0; i < 4; i++ {
+		ret.Data[i+2] = byte(1 >> uint32((3-i)*8) & 0xff)
+	}
+
+	err := conn.Write(&ret)
+	if err != nil {
+		return err
+	}
+
+	return conn.Flush()
+}
+
+func (conn *Conn) SetPing() error {
+	ret := conn.userControlMsg(pingRequest, 4)
+	for i := 0; i < 4; i++ {
+		ret.Data[i+2] = byte(1 >> uint32((3-1)*8) & 0xff)
+	}
+
+	return conn.Write((&ret))
+}
