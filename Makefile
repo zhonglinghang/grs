@@ -27,6 +27,8 @@ all: test build
 
 build:
 	env $(BUILD_ENV) $(GOBUILD) $(BUILD_FLAG) -o $(BINARY_NAME) -v && find . -type f -not -path '*/\.*' -exec $(MD5_TOOL) {} + >md5.release
+	env $(BUILD_ENV) $(GOBUILD) $(BUILD_FLAG) -o pusher tools/pusher/*.go
+	env $(BUILD_ENV) $(GOBUILD) $(BUILD_FLAG) -o puller tools/puller/*.go
 	env $(BUILD_ENV) $(GOBUILD) $(BUILD_FLAG) -o picpusher tools/picpusher/*.go
 test:
 	$(GOTEST) -v ./..
@@ -35,6 +37,8 @@ clean:
 	$(GOCLEAN)
 	rm -f $(BINARY_NAME)
 	rm -f $(BINARY_UNIX)
+	rm -f pusher-linux pusher
+	rm -f puller-linux puller
 	rm -f picpusher-linux picpusher
 
 run: build
@@ -42,6 +46,7 @@ run: build
 
 build-linux:
 	CGO_ENABLE=0 GOOS=linux GOARCH=amd64 $(GOBUILD) $(BUILD_FLAG) -o $(BINARY_UNIX) -v
+	CGO_ENABLE=0 GOOS=linux GOARCH=amd64 $(GOBUILD) $(BUILD_FLAG) -o pusher-linux tools/pusher/*.go
 	CGO_ENABLE=0 GOOS=linux GOARCH=amd64 $(GOBUILD) $(BUILD_FLAG) -o picpusher-linux tools/picpusher/*.go
 
 release:

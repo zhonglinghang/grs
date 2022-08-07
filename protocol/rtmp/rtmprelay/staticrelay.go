@@ -189,6 +189,10 @@ func (self *StaticPush) IsStart() bool {
 	return self.startflag
 }
 
+func (self *StaticPush) SendStreamEOFCmd() error {
+	return self.connectClient.WriteStreamEOFCmd()
+}
+
 func (self *StaticPush) SendStreamPingRequestCmd() error {
 	return self.connectClient.WriteStreamPingRequestCmd()
 }
